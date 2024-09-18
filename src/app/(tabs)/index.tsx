@@ -1,6 +1,6 @@
 import { View } from 'react-native';
-import food_elements from '../../../assets/data/foods';
-import ListeDeBouffe from '../../components/LesItems';
+import food_elements from '@assets/data/foods';
+import ListeDeBouffe from '@components/LesItems';
 
 export default function bigPute() {
   return (
