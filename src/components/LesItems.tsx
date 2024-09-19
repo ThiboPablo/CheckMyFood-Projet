@@ -16,7 +16,7 @@ type ListeDeBouffePropriétés = {
 const ListeDeBouffe = ({ food_element }: ListeDeBouffePropriétés) => {
   return (
     <View style={styles.container}>
-      <Image source={{ uri: food_element.image || defaultFoodImage }} style={styles.image}/>
+      <Image source={{ uri: food_element.image || defaultFoodImage }} style={styles.image} resizeMode="contain"/>
       <Text style={styles.title}>{food_element.name}</Text>
       <Text style={styles.title}>{food_element.co2}kg</Text>
     </View>
@@ -30,6 +30,8 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     padding: 10,
     borderRadius: 100,
+    flex: 1,
+    maxWidth: '50%',
   },
   title: {
     fontSize: 20,
@@ -41,7 +43,7 @@ const styles = StyleSheet.create({
     width: '80%',
   },
   image: {
-    width: '50%',
+    width: '80%',
     aspectRatio: 1,
   }
 });
