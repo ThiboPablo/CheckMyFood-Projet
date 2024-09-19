@@ -1,5 +1,6 @@
-import { StyleSheet, Text, View, Image } from 'react-native';
-import { Food_element } from '../types'
+import { StyleSheet, Text, View, Image, Pressable } from 'react-native';
+import { Food_element } from '../types';
+import { Link } from 'expo-router';
 
 
 const defaultFoodImage = 'https://static.wikia.nocookie.net/minecraft_gamepedia/images/b/b4/Herobrine.png/'
@@ -15,11 +16,13 @@ type ListeDeBouffePropriétés = {
 //toutes les info nécessaires à l'affichage.
 const ListeDeBouffe = ({ food_element }: ListeDeBouffePropriétés) => {
   return (
-    <View style={styles.container}>
+    <Link href={`/${food_element.id}`} asChild>
+    <Pressable style={styles.container}>
       <Image source={{ uri: food_element.image || defaultFoodImage }} style={styles.image} resizeMode="contain"/>
       <Text style={styles.title}>{food_element.name}</Text>
       <Text style={styles.title}>{food_element.co2}kg</Text>
-    </View>
+    </Pressable>
+    </Link>
   );
 };
 
@@ -29,7 +32,7 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: 'white',
     padding: 10,
-    borderRadius: 100,
+    borderRadius: 10,
     flex: 1,
     maxWidth: '50%',
   },
