@@ -16,7 +16,7 @@ type ListeDeBouffePropriétés = {
 //toutes les info nécessaires à l'affichage.
 const ListeDeBouffe = ({ food_element }: ListeDeBouffePropriétés) => {
   return (
-    <Link href={`/${food_element.id}`} asChild>
+    <Link href={`/menu/${food_element.id}`} asChild>
     <Pressable style={styles.container}>
       <Image source={{ uri: food_element.image || defaultFoodImage }} style={styles.image} resizeMode="contain"/>
       <Text style={styles.title}>{food_element.name}</Text>

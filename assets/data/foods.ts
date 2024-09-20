@@ -33,7 +33,7 @@ const food_elements = [
         id: 6,
         name: 'Salmon',
         image: 'https://static.wikia.nocookie.net/minecraft_gamepedia/images/2/2b/Cooked_Salmon_JE2_BE2.png',
-        co2: "-",
+        co2: 0,
     },
     {
         id: 7,
