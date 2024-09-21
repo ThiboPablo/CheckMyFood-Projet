@@ -35,6 +35,8 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     flex: 1,
     maxWidth: '50%',
+    justifyContent: 'flex-start',
+    alignItems: 'center',
   },
   title: {
     fontSize: 20,
@@ -46,7 +48,7 @@ const styles = StyleSheet.create({
     width: '80%',
   },
   image: {
-    width: '80%',
+    width: '70%',
     aspectRatio: 1,
   }
 });
