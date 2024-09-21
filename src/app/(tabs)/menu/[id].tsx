@@ -1,5 +1,5 @@
 import { useLocalSearchParams, Stack } from 'expo-router';
-import { View, Text, Image, StyleSheet } from 'react-native';
+import { View, Text, Image, StyleSheet, Pressable } from 'react-native';
 import food_elements from '@assets/data/foods';
 import defaultFoodImage from "@/components/LesItems";
 import Colors from '@/src/constants/Colors';
@@ -9,20 +9,22 @@ const typesOfInfo = ['Macro', 'Micro', 'Environ.'];
 
 const Food_detailsPage = () => {
     const { id } = useLocalSearchParams();
+
+    const [selectedInfoType, setSelectedInfoType] = useState('Macro')
     
     const food = food_elements.find(item => item.id.toString() === id);
     if (!food) {
         return <Text>Product not found</Text>
     };
 
-    const getInfoStyle = (infoType) => {
+    {/*const getInfoStyle = (infoType) => {
         switch(infoType) {
             case 'Environ.':
                 return styles.infoTextViewEnviron;
             default:
                 return styles.infoTextViewMaicro;
         }
-    };
+    };*/}
 
     return (
         <View style={styles.container}>
@@ -34,9 +36,13 @@ const Food_detailsPage = () => {
             <Text style={styles.littleTitle}>Everything you gotta know about {food.name}...</Text>
             <View style={styles.theParametersWholeView}>
                 {typesOfInfo.map((infoType) => (
-                    <View style={[styles.infoTextView, getInfoStyle(infoType)]} key={infoType}>
-                    <Text style={styles.infoText}>{infoType}</Text>
-                    </View>
+                    <Pressable
+                    style={[styles.infoTextView, {backgroundColor: selectedInfoType === infoType ? 'green' : 'lightgreen'},]}
+                    key={infoType}
+                    onPress={() => {setSelectedInfoType(infoType);}}
+                    >
+                    <Text style={[styles.infoText, {color: selectedInfoType === infoType ? 'white' : 'black'},]}>{infoType}</Text>
+                    </Pressable>
                 ))}
             </View>
         </View>
@@ -79,20 +85,15 @@ const styles = StyleSheet.create({
     },
     infoTextView: {
         width: '32%',
+        backgroundColor: '#D0FFBC',
         alignItems: 'center',
         justifyContent: 'center',
         aspectRatio: 2.5,
         borderRadius: 10,
     },
-    infoTextViewMaicro: {
-        backgroundColor: '#D8DCD6',
-    },
-    infoTextViewEnviron: {
-        backgroundColor: '#E0FFD2',
-    },
     infoText: {
         fontSize: 20,
-        fontWeight: 'bold',
+        fontWeight: 'normal',
     },
 });
 
