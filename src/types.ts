@@ -3,7 +3,15 @@ export type Food_element = {
   image: string | null;
   name: string;
   co2: number;
+  category: string;
 };
+
+export type Food_category = {
+  id: number;
+  name: string;
+  introduction: string;
+  general_facts: string;
+}
 
 export type PizzaSize = 'S' | 'M' | 'L' | 'XL';
 

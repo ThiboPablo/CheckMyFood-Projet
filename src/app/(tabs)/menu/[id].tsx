@@ -1,9 +1,11 @@
 import { useLocalSearchParams, Stack } from 'expo-router';
-import { View, Text, Image, StyleSheet, Pressable } from 'react-native';
+import { View, Text, Image, StyleSheet, Pressable, ScrollView } from 'react-native';
 import food_elements from '@assets/data/foods';
+import food_categories from '@assets/data/categories';
 import defaultFoodImage from "@/components/LesItems";
 import Colors from '@/src/constants/Colors';
 import { useState } from 'react';
+import PageDinfo from '@/src/components/LesInfos';
 
 const typesOfInfo = ['Macro', 'Micro', 'Environ.'];
 
@@ -17,6 +19,9 @@ const Food_detailsPage = () => {
         return <Text>Product not found</Text>
     };
 
+    const theCategory = food_categories.find(item => item.name.toString() === food.category);
+    const noCategory = !theCategory;
+
     {/*const getInfoStyle = (infoType) => {
         switch(infoType) {
             case 'Environ.':
@@ -27,6 +32,7 @@ const Food_detailsPage = () => {
     };*/}
 
     return (
+        <ScrollView style={styles.scrollView}>
         <View style={styles.container}>
             <Stack.Screen options={{ title: food.name }}/>
             <Image source={{ uri: food.image || defaultFoodImage }}
@@ -34,10 +40,15 @@ const Food_detailsPage = () => {
             />
             <Text style={styles.co2}>Avg. CO2: {food.co2}kg/kg.</Text>
             <Text style={styles.littleTitle}>Everything you gotta know about {food.name}...</Text>
+            {!noCategory ? (
+                <PageDinfo food_category={theCategory} />
+            ) : (
+                <Text style={styles.littleTitle}>No category available</Text>
+            )}
             <View style={styles.theParametersWholeView}>
                 {typesOfInfo.map((infoType) => (
                     <Pressable
-                    style={[styles.infoTextView, {backgroundColor: selectedInfoType === infoType ? 'green' : 'lightgreen'},]}
+                    style={[styles.infoTextView, {backgroundColor: selectedInfoType === infoType ? '#060644' : 'lightblue'},]}
                     key={infoType}
                     onPress={() => {setSelectedInfoType(infoType);}}
                     >
@@ -46,6 +57,7 @@ const Food_detailsPage = () => {
                 ))}
             </View>
         </View>
+        </ScrollView>
     );
 };
 
@@ -56,6 +68,10 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'flex-start',
     },
+    scrollView: {
+        flex: 1,
+        backgroundColor: '#f5f5f5',
+      },
     image: {
         width: '50%',
         aspectRatio: 1,
@@ -76,6 +92,11 @@ const styles = StyleSheet.create({
         width: '70%',
         marginVertical: 5,
     },
+    bigTitle: {
+        fontSize: 25,
+        fontWeight: '600',
+
+    },
     theParametersWholeView: {
         flexDirection: 'row',
         justifyContent: 'space-between', // Changed from 'space-around'
@@ -85,7 +106,7 @@ const styles = StyleSheet.create({
     },
     infoTextView: {
         width: '32%',
-        backgroundColor: '#D0FFBC',
+        backgroundColor: '#060644',
         alignItems: 'center',
         justifyContent: 'center',
         aspectRatio: 2.5,

@@ -9,11 +9,6 @@ type ListeDeBouffePropriétés = {
   food_element: Food_element;
 }
 
-//Fonction pour afficher 1 item
-//En utilisant la fonction ListeDeBouffe, on envoie 1 info, celle de l'élément à saisir dans la liste de
-//données présentes dans ...assets/data/foods.
-//La fonction utilise cette info pour choisir les éléments à afficher dans le bloc d'item, et renvoie
-//toutes les info nécessaires à l'affichage.
 const ListeDeBouffe = ({ food_element }: ListeDeBouffePropriétés) => {
   return (
     <Link href={`/menu/${food_element.id}`} asChild>
